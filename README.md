@@ -2,6 +2,9 @@
 
 # 青龙面板订阅流程
 
+需要这四个依赖
+![image](https://user-images.githubusercontent.com/55354489/228259108-46c99473-3505-4ee3-b03d-5422863095d5.png)
+
 
 名称
 
