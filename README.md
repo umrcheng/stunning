@@ -54,7 +54,7 @@ ln -sf /ql/data/repo/umrcheng_octo/config.json /ql/data/config/
 
 登陆用户然后打开这个网址，右键检查，选择控制台，输入`console.log(document.cookie)`
 ```
-https://www.javbus.com/forum/home.php?mod=spacecp&ac=credit
+https://xxxxxx/forum/home.php?mod=spacecp&ac=credit
 ```
 
 ![image](https://user-images.githubusercontent.com/55354489/228255682-9c3430de-1616-4882-8ad7-35045c0c1761.png)
