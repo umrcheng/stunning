@@ -52,7 +52,7 @@ ln -sf /ql/data/repo/umrcheng_octo/config.json /ql/data/config/
 
 # 编辑cookie
 
-登陆用户然后打开这个网址，右键检查，选择控制台，输入`console.log(document.cookie)`
+登陆用户然后打开这个网址，右键检查，选择控制台，输入`console.log(document.cookie)`, `xxxxxx`这个部分你要是能翻墙就填翻墙的地址，不能翻墙就填不翻墙的地址，`sgin`中的url参数也要改
 ```
 https://xxxxxx/forum/home.php?mod=spacecp&ac=credit
 ```
