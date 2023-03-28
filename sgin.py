@@ -66,70 +66,34 @@ def get_login_header(authority: str, href: str):
 
 
 def update_header(dest: dict, header: dict):
-    """
-    更新请求头
-
-    :param dest: 更新的请求头信息
-    :param header: 请求头
-    :return: 更新后的请求头
-    """
     for item in dest:
         header[item] = dest[item]
     return header
 
 
 def format_url(href: str):
-    """
-    把网址最后的 / 去掉
-
-    :param href: 网址信息
-    :return: 格式化后的字符
-    """
     if href[-1] == "/":
         return href[:-1]
     return url
 
 
 def get_scheme(href: str):
-    """
-    获取请求协议
-
-    :param href: 网址字符串
-    :return: 协议类型字符串
-    """
     if "https" in href:
         return "https"
     return "http"
 
 
 def get_authority(href: str):
-    """
-    根据网址获取该网址的域名信息
-
-    :param href: 网址字符
-    :return: 域名字符串
-    """
     href = format_url(href)
     return href.split("//")[-1]
 
 
 def load_config():
-    """
-    加载配置文件
-
-    :return: 配置文件转中的cookies字符信息
-    """
-    with open("../config.json", "r", encoding="utf-8") as config:
+    with open("config.json", "r", encoding="utf-8") as config:
         return json.loads(config.read())["cookies"]
 
 
 def load_cookies(string: str):
-    """
-    把cookie格式的字符转换为 dict 对象
-
-    :param string: cookie格式的字符
-    :return: dict 类型的cookie对象
-    """
     tmp = ""
     for i in string:
         if i == " ":
@@ -147,13 +111,7 @@ def load_cookies(string: str):
 
 
 def save_cookies(sess: requests.session):
-    """
-    保存最新的会话cookie
-
-    :param sess: dict 类型的cookie对象
-    :return:
-    """
-    with open("../config.json", "w", encoding="utf=8") as config:
+    with open("config.json", "w", encoding="utf=8") as config:
         temp_cookies = ""
         session_cookies = sess.cookies.get_dict()
         for i in session_cookies:
@@ -163,13 +121,6 @@ def save_cookies(sess: requests.session):
 
 
 def user_info(html_text: str):
-    """
-    输出个人信息html页面字符串中的个人信息
-
-    :param html_text: html页面字符串
-    :return:
-    """
-
     info = {}
     html = etree.HTML(html_text)
     info["username"] = html.xpath("//*[@id='ct']/div/div[2]/div/div[1]/div[1]/h2/text()")[0].strip("\n").strip()
@@ -228,20 +179,13 @@ def main(href):
     analysis.print_partition("——" * 50)
     login_header = get_login_header(authority, url)
     response = session.get(login_url, headers=login_header)
-    analysis.print_header(response)
-    analysis.print_html(response)
-
-    print("response.cookies", len(response.cookies), response.cookies, type(response.cookies))
-    print("session.cookies", len(session.cookies), session.cookies, type(session.cookies))
 
     save_cookies(session)  # 保存cookie信息
 
     analysis.print_partition("——" * 50)
-    mileage = "https://www.javbus.com/forum/home.php?mod=space&uid=373870"
+    mileage = f"{url}/forum/home.php?mod=space&uid=373870"
     mileage_header = get_login_header(authority, login_url)
     response = session.get(mileage, headers=mileage_header)
-    analysis.print_header(response)
-    analysis.print_html(response)
 
     analysis.print_partition("——" * 50)
     print("签到完成")
@@ -249,6 +193,6 @@ def main(href):
 
 
 if __name__ == '__main__':
-    url = "https://www.javbus.com"
-    # url = "https://www.javsee.cfd"
+    # url = "https://www.javbus.com"
+    url = "https://www.javsee.cfd"
     main(url)
